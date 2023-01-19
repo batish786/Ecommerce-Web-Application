@@ -1,24 +1,19 @@
 package com.restapi.spring.controller;
 
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.restapi.spring.entity.Customer;
-import com.restapi.spring.helper.CustomerHelper;
-import com.restapi.spring.repository.CustomersRepo;
 import com.restapi.spring.request.CustomerSaveReq;
 import com.restapi.spring.request.CustomerUpdateReq;
-import com.restapi.spring.response.CustomerDataResponse;
 import com.restapi.spring.service.CustomerService;
 
 
@@ -30,12 +25,18 @@ public class CustomerController {
 	private CustomerService customerService;
 	
 	@PostMapping("/save")
-	public void saveCustomer(@RequestBody CustomerSaveReq request){
-		customerService.saveCustomerData(request);
+	public ResponseEntity<?>  saveCustomer(@RequestBody CustomerSaveReq request){
+		try {
+			customerService.saveCustomerData(request);
+			return new ResponseEntity<>("Data is Inserted", HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<String>("UserId Already Present" , HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
-	@GetMapping("/userId")
-	public List<CustomerDataResponse> getUserId(@RequestParam long userId) throws Exception{
-	return customerService.customerByUserId(userId);
+	@GetMapping("/user/{id}")
+	public Customer getUserId(@PathVariable long id) throws Exception{
+	return customerService.getCustomer(id);
 	}
 	
 	@PutMapping("/update")

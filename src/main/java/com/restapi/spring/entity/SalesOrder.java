@@ -16,7 +16,7 @@ import lombok.Data;
 public class SalesOrder {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	private String cart_id;
 	private String customer_id;

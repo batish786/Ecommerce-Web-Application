@@ -31,11 +31,15 @@ public class CustomerServiceImpl implements CustomerService{
 	private UsersRepo usersRepo;
 	@Override
 	@Transactional
-	public void saveCustomerData(CustomerSaveReq request) {
+	public  void saveCustomerData(CustomerSaveReq request) {
 		Customer customer=CustomerHelper.customerEntityConverter(request);
 	     Optional<User>  user = usersRepo.findById(request.getUserId());
+	     Optional<List<Customer>>  customer1 = customerrepo.findByUserId(user.get().getId());
 	     customer.setUser(user.get());
-		customerrepo.save(customer);		
+	    if(customer1.isPresent() && customer1.get().isEmpty()) {
+	    	customerrepo.save(customer);
+	    }
+	    
 	}
 
 	@Override
@@ -43,6 +47,7 @@ public class CustomerServiceImpl implements CustomerService{
 		Optional<List<Customer>> customer = null;
 		try {
 			customer = customerrepo.findByUserId(userId);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -55,6 +60,12 @@ public class CustomerServiceImpl implements CustomerService{
 	     Optional<User>  user = usersRepo.findById(req.getUserId());
 	     customer.setUser(user.get());
 		customerrepo.save(customer);
+	}
+
+	@Override
+	public Customer getCustomer(Long id) {
+	 Optional<Customer> customer =customerrepo.findById(id);
+		return customer.get();
 	}
 
 

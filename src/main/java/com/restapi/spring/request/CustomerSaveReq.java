@@ -15,6 +15,4 @@ public class CustomerSaveReq {
 	private  ShippingAddress shippingAddress;
 	private Long userId;
 
-
-
 }

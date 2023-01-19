@@ -11,6 +11,6 @@ public class CustomerUpdateReq {
 	private String lastName;
 	private String customerPhone;
 	private BillingAddress billingAddress;
-	private  ShippingAddress shippingAddress;
+	private ShippingAddress shippingAddress;
 	private Long userId;
 }

@@ -11,7 +11,7 @@ import com.restapi.spring.request.CustomerSaveReq;
 
 
 @Repository
-public interface CustomersRepo extends JpaRepository<Customer, Integer>{
+public interface CustomersRepo extends JpaRepository<Customer, Long>{
 
 	Optional<List<Customer>> findByUserId(long userId);
 }
