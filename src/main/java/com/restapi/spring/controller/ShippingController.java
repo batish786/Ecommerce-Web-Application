@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.restapi.spring.request.CustomerUpdateReq;
@@ -25,8 +26,8 @@ public class ShippingController {
 	@Autowired
 	private ShippingService shippingService;
 	
-	@GetMapping("/get/id")
-	public List<ShippingResponse> getId(@RequestBody long id) throws Exception{
+	@GetMapping("/get")
+	public List<ShippingResponse> getId(@RequestParam long id) throws Exception{
 	return	shippingService.findById(id);
 	}
 	
