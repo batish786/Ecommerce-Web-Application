@@ -1,14 +1,13 @@
 package com.restapi.spring.entity;
 
-import java.util.List;
-
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,11 +16,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Setter
-@Getter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 @Entity
 public class Customer {
 
@@ -32,20 +29,23 @@ public class Customer {
 	private String lastname;
 	private String customerPhone;
 
-	
+	@JsonIgnore 
 	@OneToOne(cascade=CascadeType.ALL)
 	private BillingAddress billingAddress;
 	
-
+	@JsonIgnore 
 	@OneToOne(cascade=CascadeType.ALL)
 	private ShippingAddress shippingAddress;
 
+	@JsonIgnore 
 	@OneToOne(cascade=CascadeType.ALL)
 	private User user;
 
+	@JsonIgnore 
 	@OneToOne(cascade=CascadeType.ALL)
 	private Cart cart;
 	
+	@JsonIgnore 
 	@OneToOne(cascade=CascadeType.ALL)
 	private SalesOrder salesOrder;
 

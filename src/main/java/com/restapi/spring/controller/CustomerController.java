@@ -1,6 +1,8 @@
 package com.restapi.spring.controller;
 
 
+import javax.websocket.server.PathParam;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,10 +12,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.restapi.spring.entity.Customer;
 import com.restapi.spring.request.CustomerSaveReq;
 import com.restapi.spring.request.CustomerUpdateReq;
+import com.restapi.spring.response.UserDataResponse;
 import com.restapi.spring.service.CustomerService;
 
 
@@ -34,9 +38,10 @@ public class CustomerController {
 			return new ResponseEntity<String>("UserId Already Present" , HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	@GetMapping("/user/{id}")
-	public Customer getUserId(@PathVariable long id) throws Exception{
-	return customerService.getCustomer(id);
+	@GetMapping("/user")
+	public ResponseEntity<Customer> getUserId(@RequestParam long id) throws Exception{
+	Customer customer= customerService.getCustomer(id);
+	return new ResponseEntity<>(customer, HttpStatus.OK);
 	}
 	
 	@PutMapping("/update")

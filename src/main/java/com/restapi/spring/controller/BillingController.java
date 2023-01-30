@@ -36,7 +36,7 @@ public class BillingController {
 		return ResponseEntity.ok(Boolean.TRUE);
 	}
 	
-	@GetMapping("/data/id")
+	@GetMapping("/data")
 	public List<BillingAddress> getId(@RequestParam long id) throws Exception{ 
 		return billingService.getId(id);
 	}
