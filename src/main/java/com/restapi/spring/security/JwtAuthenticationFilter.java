@@ -35,7 +35,7 @@ public class JwtAuthenticationFilter  extends OncePerRequestFilter {
 		String requestTokenHeader = request.getHeader("Authorization");
 		String username=null;
 		String jwtToken=null;
-
+		
 		//null and format
 		if(requestTokenHeader!=null && requestTokenHeader.startsWith("Bearer "))
 		{
@@ -70,18 +70,9 @@ public class JwtAuthenticationFilter  extends OncePerRequestFilter {
 				System.out.println("Token is not validated..");
 			}
 
-
-
-
 		}
 
-
 		filterChain.doFilter(request,response);
-
-
-
-
-
 
 	}
 }
