@@ -35,7 +35,7 @@ public class CustomerController {
 			return new ResponseEntity<>("Data is Inserted", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<String>("UserId Already Present" , HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<String>("UserId is not Present" , HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	@GetMapping("/user")
