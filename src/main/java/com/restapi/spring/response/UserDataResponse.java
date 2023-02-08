@@ -12,5 +12,6 @@ public class UserDataResponse {
 	private String emailId;
 	private String password;
 	private Boolean enabled;
+	private String role;
 }
 

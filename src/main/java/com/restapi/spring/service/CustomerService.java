@@ -14,4 +14,6 @@ public interface CustomerService {
 
 	List<CustomerDataResponse> customerByUserId(long userId) throws Exception;
 	void updateCustomerData(CustomerUpdateReq req);
+	
+//	List<Customer> updateCustomer(CustomerUpdateReq req);
 }

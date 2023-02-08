@@ -20,7 +20,7 @@ import com.restapi.spring.service.ShippingService;
 
 
 @RestController
-@RequestMapping("/shipping")
+@RequestMapping("/admin/shipping")
 public class ShippingController {
 
 	@Autowired

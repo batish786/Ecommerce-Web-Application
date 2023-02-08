@@ -16,6 +16,7 @@ public class UserHelper {
 		dataResponse.setEmailId(user.getEmailId());
 		dataResponse.setEnabled(Boolean.TRUE);
 		dataResponse.setPassword(user.getPassword());
+		dataResponse.setRole(user.getRole());
 		return dataResponse;
 		
 	}
@@ -24,6 +25,7 @@ public class UserHelper {
 		User user = new User();
 		user.setEmailId(request.getEmailId());
 		user.setEnabled(Boolean.TRUE);
+		user.setRole(request.getRole());
 		user.setPassword(bCryptPasswordEncoder.encode(request.getPassword()));
 		return user;
 		

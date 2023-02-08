@@ -9,8 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.restapi.spring.securityservice.CustomUserDetailsService;
@@ -21,6 +20,7 @@ public class SpringConfiguration extends WebSecurityConfigurerAdapter{
 
 	@Autowired
 	private CustomUserDetailsService customUserDetailsService;
+	
 	
 	 @Autowired
 	 private JwtAuthenticationFilter jwtFilter;
@@ -39,7 +39,11 @@ public class SpringConfiguration extends WebSecurityConfigurerAdapter{
 		.authorizeRequests()
 		.antMatchers("/signUp").permitAll()
 		.antMatchers("/token").permitAll()
-		.anyRequest().authenticated()
+		.antMatchers("/admin/**").hasRole("ADMIN")
+		.antMatchers("/user/**").hasRole("USER")
+		.antMatchers("/**").permitAll()
+		.and()
+		.formLogin()
 		.and()
 		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 	    .and()
@@ -55,9 +59,10 @@ public class SpringConfiguration extends WebSecurityConfigurerAdapter{
 	}
 
 	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return NoOpPasswordEncoder.getInstance();
+	public BCryptPasswordEncoder passwordEncoder() {
+		return new  BCryptPasswordEncoder();
 	}
+
 
 	@Bean
 	@Override

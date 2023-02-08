@@ -1,11 +1,14 @@
 package com.restapi.spring.controller;
 
 
+import java.util.List;
+
 import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.NonNullApi;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +25,8 @@ import com.restapi.spring.service.CustomerService;
 
 
 @RestController
-@RequestMapping("/customer")
+@RequestMapping("/admin/customer")
+
 public class CustomerController {
 
 	@Autowired
@@ -49,5 +53,10 @@ public class CustomerController {
 	customerService.updateCustomerData(req);
 		return ResponseEntity.ok(Boolean.TRUE);
 	}
+	
+//	@PutMapping("/user/allupdate")
+//	public List<Customer> customers(@RequestBody CustomerUpdateReq req){
+//	return	customerService.updateCustomer(req);
+//	}
 }
 
